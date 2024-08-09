@@ -22,8 +22,8 @@ menu:
           weight: 6
 
 params:
-    description: "I am a Professor of Philology at the Institute of Romance Philology in Regensburg, Germany. My research focuses mostly on Portuguese irregular verbs."
-    author: Moritz-Maria von Igelfeld
+    description: I am graduate student at UT Austin. My primary research interest is Reinforcement Learning with a focus on methods for generalization, adaptability and sample efficiency."
+    author: Jasmeet Kaur
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
     defaultTheme: light
