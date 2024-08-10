@@ -3,7 +3,7 @@ title: "Lectures at the Villa of Reduced Circumstances"
 date: 2003-03-10
 lastmod: 2024-07-12
 tags: ["Romance languages","philology","irregular verbs","Spanish","Portuguese"]
-author: "Moritz-Maria von Igelfeld"
+author: "Jasmeet Kaur"
 description: "This graduate course presents classical results in Romance philology." 
 summary: "This graduate course presents classical results in Romance philology. it focuses especially on Portugese and Spanish irregular verbs." 
 cover:
