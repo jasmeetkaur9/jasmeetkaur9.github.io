@@ -33,4 +33,4 @@ I am currently a graduate student at UT Austin.
 + Heuristic Search.
 + Search-based Planning. 
 
-I graduated with B.E. (hons) Computer Science and M.Sc. Chemistry from BITS Pilani, Goa Campus in 2020. I worked for a brief time as a software development enginer at Amazon, India. 
+I graduated with B.E. (hons) Computer Science and M.Sc. Chemistry from BITS Pilani, Goa Campus in 2020. I worked for a brief time as a software development engineer at Amazon, India. 

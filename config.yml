@@ -51,7 +51,7 @@ params:
     profileMode:
           enabled: true
           title: Jasmeet Kaur
-          subtitle: "I am graduate student at UT Austin. My primary research interest is Reinforcement Learning with a focus on methods for generalization, adaptability and sample efficiency. "
+          subtitle: "I am a graduate student at UT Austin. My primary research interest is Reinforcement Learning with a focus on methods for generalization, adaptability and sample efficiency. "
           imageUrl: "picture.jpeg"
           imageWidth: 160
           imageHeight: 160
