@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Blogs on Jasmeet Kaur</title>
-    <link>https://jasmeetkaur9.github.io/blog/</link>
-    <description>Recent content in Blogs on Jasmeet Kaur</description>
+    <title>Useful Tips on Jasmeet Kaur</title>
+    <link>https://jasmeetkaur9.github.io/tags/useful-tips/</link>
+    <description>Recent content in Useful Tips on Jasmeet Kaur</description>
     <generator>Hugo -- 0.135.0</generator>
     <language></language>
     <lastBuildDate>Wed, 28 May 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://jasmeetkaur9.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://jasmeetkaur9.github.io/tags/useful-tips/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>From Paper to Prototype</title>
       <link>https://jasmeetkaur9.github.io/blog/blog1/</link>
