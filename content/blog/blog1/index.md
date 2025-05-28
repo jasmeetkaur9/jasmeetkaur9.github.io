@@ -5,7 +5,7 @@ lastmod: 2025-05-28
 tags: ["Useful Tips", "Reinforcement Learning", "PyTorch", "Research Practice"]
 author: "Jasmeet Kaur"
 description: "This article provides a practical guide for learning to implement a researcch paper in reinforcement learning."
-summary: "An in-depth guide to training and experimenting in reinforcement learning."
+summary: "An brief guide to training and experimenting in reinforcement learning."
 showToc: false
 disableAnchoredHeadings: false
 ---
