@@ -95,13 +95,10 @@ pairs. Since Enduro has a larger action space, this is evident in the performanc
 <small><i>Author Note
 
 Feel free to reach out if you:
-
 1\. Have any questions or get stuck implementing the ideas discussed in
 this article - I'm happy to help.
-
 2\. Are a student seeking guidance on topics related to
 research and reinforcement learning - I welcome your questions and will
 do my best to answer them.
-
 Use of generative AI: No other part of this article was generated
 using generative AI tools, except for this author note (:P).</i> </small>
