@@ -76,26 +76,21 @@ Deep DQN with a Dueling DQN over 6 million environment interactions for
 Breakout and Enduro.
 
 The choice of these two games is intentional. Dueling does not impact
-the performance of the agent in Breakout. The authors of the original paper on
+the performance of the agent in Breakout. This is shown in the first image. The authors of the original paper on
 Dueling Networks \[1\] point out that the benefit of using dueling
 network increases with large action space over using single stream of
 state-action function. It is intuitive to expect better estimates of the
 state functions with more frequent updates coming for state-action
-pairs. This is evident in the performance with Dueling for Enduro.
+pairs. This is evident in the performance with Dueling for Enduro in the second image.
 
-<figure id="fig:comparison">
-<figure id="fig:breakout">
-<span class="image placeholder" data-original-image-src="Breakout.png"
-data-original-image-title="" width="\textwidth"></span>
-<figcaption>Breakout</figcaption>
-</figure>
-<figure id="fig:enduro">
-<span class="image placeholder" data-original-image-src="enduro.png"
-data-original-image-title="" width="\textwidth"></span>
-<figcaption>Enduro</figcaption>
-</figure>
-<figcaption>Comparison of Dueling Network</figcaption>
-</figure>
+![Breakout](Breakout.png)
+![Enduro](enduro.png)
+
+
+## References
+
+1. Sutton, R. S., & Barto, A. G. (2018). Reinforcement learning: An introduction (2nd ed.). MIT Press.
+2. Wang, Z., Schaul, T., Hessel, M., Van Hasselt, H., Lanctot, M., & De Freitas, N. (2016). Dueling network architectures for deep reinforcement learning. In International Conference on Machine Learning (ICML) (pp. 1995–2003).
 
 <small> Author Note
 
