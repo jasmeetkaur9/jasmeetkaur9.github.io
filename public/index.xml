@@ -6,8 +6,15 @@
     <description>Recent content on Jasmeet Kaur</description>
     <generator>Hugo -- 0.135.0</generator>
     <language></language>
-    <lastBuildDate>Wed, 28 May 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 19 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://jasmeetkaur9.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Duel for the win.</title>
+      <link>https://jasmeetkaur9.github.io/blog/blog2/</link>
+      <pubDate>Tue, 19 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>https://jasmeetkaur9.github.io/blog/blog2/</guid>
+      <description>A short guide that walks through the understanding and implementing Dueling DDQN.</description>
+    </item>
     <item>
       <title>From Paper to Prototype</title>
       <link>https://jasmeetkaur9.github.io/blog/blog1/</link>

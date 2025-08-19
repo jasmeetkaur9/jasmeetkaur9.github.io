@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>A Duel for the win. | Jasmeet Kaur</title>
+<meta name="keywords" content="Reinforcement Learning, Research Practice">
+<meta name="description" content="A short guide that walks through the understanding and implementing Dueling DDQN.">
+<meta name="author" content="Jasmeet Kaur">
+<link rel="canonical" href="https://jasmeetkaur9.github.io/blog/blog2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.e690afcd5c523330d5c8b4d746eb158361600a015e99518d4d246a6ccab0cc19.css" integrity="sha256-5pCvzVxSMzDVyLTXRusVg2FgCgFemVGNTSRqbMqwzBk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://jasmeetkaur9.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jasmeetkaur9.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jasmeetkaur9.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://jasmeetkaur9.github.io/apple-touch-icon.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://jasmeetkaur9.github.io/blog/blog2/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="A Duel for the win." />
+<meta property="og:description" content="A short guide that walks through the understanding and implementing Dueling DDQN." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jasmeetkaur9.github.io/blog/blog2/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-08-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-08-19T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A Duel for the win."/>
+<meta name="twitter:description" content="A short guide that walks through the understanding and implementing Dueling DDQN."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blogs",
+      "item": "https://jasmeetkaur9.github.io/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "A Duel for the win.",
+      "item": "https://jasmeetkaur9.github.io/blog/blog2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "A Duel for the win.",
+  "name": "A Duel for the win.",
+  "description": "A short guide that walks through the understanding and implementing Dueling DDQN.",
+  "keywords": [
+    "Reinforcement Learning", "Research Practice"
+  ],
+  "articleBody": "Dueling Double Q-Learning Recently, I needed to implement a Dueling Double Q-learning Agent and decided to write a short guide that walks through the concepts, need and details of this implementation.\nThe overall problem is about sequential decision making where an agent interacts with an environment and learns to maximize cumulative reward in the environment. A formal description of the problem (a framework called MDP) includes a state space, an action space, reward function, transition function of the environment. Q-learning is one method that helps to achieve part of this goal when an agent is in a discrete action space. The key idea of this algorithm is to capture how good it is to be in a state and take a particular action and use such a function to take an action in a given state that maximizes this value.\nIf $Q(s_t, a_t)$ captures this value for a state-action pair, a general update for a state-action pair at time t is given as follows (Eq 6.8 [1]): $$Q(s_t, a_t) \\leftarrow Q(s_t, a_t) + \\alpha \\left[ r_{t+1} + \\gamma \\max_{a’} Q\\left(s_{t+1}, a’\\right) - Q(s_t, a_t) \\right]$$ Although one selects an action that maximizes the Q-value, using the maximum of an estimate for an estimate of the maximum value leads to a positive bias. To solve this problem of maximization bias, another algorithm called the Double DQN with two separate Q-tables uses the following update for improved stability.\n$$Q_1(s_t, a_t) \\leftarrow Q_1(s_t, a_t) + \\alpha \\left[ r_{t+1} + \\gamma Q_2\\left(s_{t+1}, \\arg\\max_{a} Q_1(s_{t+1}, a)\\right) - Q_1(s_t, a_t) \\right]$$\nQ-learning or Double Q-learning can be used in the tabular case when the environment is small. But as the size of the environment, state space and action space increases, function approximators like deep networks come handy to generalize learning over the state and action space. The function approximator usually outputs the Q-value of a state-action pair. This value captures the return by learning from a series of episodes of environment interactions. Deep Networks help scale learning to large MDPs. In this article, I discuss the benefits of using a specific architecture called a Dueling Network with Double Q-Learning and show its performance for two Atari games.\nLet’s look what is the overall idea of this network. For Atari games, the input is processed through a CNN as it consists of frames of visual data. Instead of outputting the Q-value for each state and action pair, the output from CNN is split into two streams. One of these outputs the Value of a state, $V(s)$ and the other outputs the Advantage of taking an action in that state, $A(s,a)$. The expected value of this Advantage function is zero. This can be included by adding the mean value as an regularization to help the stability.\n$$A(s, a) = Q(s, a) - V(s)$$ $$\\mathbf{E}_{a \\sim \\pi(a|s)}[A(s, a)] = 0$$\n$$Q(s, a) = V(s) + \\left( A(s, a) - \\frac{1}{|\\mathcal{A}|} \\sum_{a’} A(s, a’) \\right)$$ The original paper on Dueling Network Architectures [2] suggests the following update for Q-function for the optimal policy. $$Q(s, a) = V(s) + \\left( A(s, a) - \\max_{a’} A(s, a’) \\right)$$ For the implementations as a part of this article, I have used the first update for more stable learning.\nImplementation Details I used an initial Sequential Block consisting of 3 CNN layers followed by two linear layers with 512 hidden number of units for the Value function and Q-Value Function stream. The results show a comparison of a Deep DQN with a Dueling DQN over 6 million environment interactions for Breakout and Enduro.\nThe choice of these two games is intentional. Dueling does not impact the performance of the agent in Breakout. The authors of the original paper on Dueling Networks [1] point out that the benefit of using dueling network increases with large action space over using single stream of state-action function. It is intuitive to expect better estimates of the state functions with more frequent updates coming for state-action pairs. This is evident in the performance with Dueling for Enduro.\nBreakout Enduro Comparison of Dueling Network Author Note\nFeel free to reach out if you:\n1. Have any questions or get stuck implementing the ideas discussed in this article - I’m happy to help.\n2. Are a student seeking guidance on topics related to school, research, or reinforcement learning - I welcome your questions and will do my best to answer them.\n3. Use of generative AI: No other part of this article was generated using generative AI tools, except for this author note (:P). ",
+  "wordCount" : "753",
+  "inLanguage": "en",
+  "datePublished": "2025-08-19T00:00:00Z",
+  "dateModified": "2025-08-19T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Jasmeet Kaur"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jasmeetkaur9.github.io/blog/blog2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jasmeet Kaur",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jasmeetkaur9.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+            {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+            {left: "\\begin{align}", right: "\\end{align}", display: true},
+            {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},
+            {left: "\\begin{gather}", right: "\\end{gather}", display: true},
+            {left: "\\begin{CD}", right: "\\end{CD}", display: true},
+          ],
+          throwOnError : false
+        });
+    });
+</script>
+ 
+
+
+</head>
+
+<body class="" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jasmeetkaur9.github.io/" accesskey="h" title="Jasmeet Kaur">
+                <img src="https://jasmeetkaur9.github.io/favicon.ico" alt="" aria-label="logo"
+                    height="18"
+                    width="18">Jasmeet Kaur</a>
+            <div class="logo-switches">
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jasmeetkaur9.github.io/publications/" title="Publications">
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jasmeetkaur9.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jasmeetkaur9.github.io/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jasmeetkaur9.github.io/collabs/" title="Collabs">
+                    <span>Collabs</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jasmeetkaur9.github.io/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+    <main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      A Duel for the win.
+    </h1>
+    <div class="post-meta"><span title='2025-08-19 00:00:00 +0000 UTC'>August 2025</span>&nbsp;&middot;&nbsp;Jasmeet Kaur
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="dueling-double-q-learning">Dueling Double Q-Learning<a hidden class="anchor" aria-hidden="true" href="#dueling-double-q-learning">#</a></h1>
+<p>Recently, I needed to implement a Dueling Double Q-learning Agent and
+decided to write a short guide that walks through the concepts, need and
+details of this implementation.</p>
+<p>The overall problem is about sequential decision making where an agent
+interacts with an environment and learns to maximize cumulative reward
+in the environment. A formal description of the problem (a framework called MDP) includes
+a state space, an action space, reward function, transition function of
+the environment. Q-learning is one method that helps to achieve part of
+this goal when an agent is in a discrete action space. The key idea of
+this algorithm is to capture how good it is to be in a state and take a
+particular action and use such a function to take an action in a given state that maximizes this
+value.</p>
+<p>If $Q(s_t, a_t)$ captures this value for a state-action pair, a general
+update for a state-action pair at time t is given as follows (Eq 6.8
+[1]):
+$$Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[ r_{t+1} + \gamma \max_{a&rsquo;} Q\left(s_{t+1}, a&rsquo;\right) - Q(s_t, a_t) \right]$$
+Although one selects an action that maximizes the Q-value, using the
+maximum of an estimate for an estimate of the maximum value leads to
+a positive bias. To solve this problem of maximization bias, another algorithm
+called the Double DQN with two separate Q-tables uses the following update for improved stability.</p>
+<p>$$Q_1(s_t, a_t) \leftarrow Q_1(s_t, a_t) + \alpha \left[ r_{t+1} + \gamma Q_2\left(s_{t+1}, \arg\max_{a} Q_1(s_{t+1}, a)\right) - Q_1(s_t, a_t) \right]$$</p>
+<p>Q-learning or Double Q-learning can be used in the tabular case when the
+environment is small. But as the size of the environment, state space
+and action space increases, function approximators like deep networks
+come handy to generalize learning over the state and action space. The function
+approximator usually outputs the Q-value of a state-action pair. This value captures
+the return by learning from a series of episodes of
+environment interactions. Deep Networks help scale learning to large
+MDPs. In this article, I discuss the benefits of using a specific
+architecture called a Dueling Network with Double Q-Learning and show
+its performance for two Atari games.</p>
+<p>Let&rsquo;s look what is the overall idea of this network. For Atari games,
+the input is processed through a CNN as it consists of frames of visual data. Instead of outputting the Q-value
+for each state and action pair, the output from CNN is split into two
+streams. One of these outputs the Value of a state, $V(s)$ and the other
+outputs the Advantage of taking an action in that state, $A(s,a)$. The
+expected value of this Advantage function is zero. This can be included
+by adding the mean value as an regularization to help the stability.</p>
+<p>$$A(s, a) = Q(s, a) - V(s)$$
+$$\mathbf{E}_{a \sim \pi(a|s)}[A(s, a)] = 0$$</p>
+<p>$$Q(s, a) = V(s) + \left( A(s, a) - \frac{1}{|\mathcal{A}|} \sum_{a&rsquo;} A(s, a&rsquo;) \right)$$
+The original paper on Dueling Network Architectures [2] suggests the
+following update for Q-function for the optimal policy.
+$$Q(s, a) = V(s) + \left( A(s, a) - \max_{a&rsquo;} A(s, a&rsquo;) \right)$$ For the
+implementations as a part of this article, I have used the first update
+for more stable learning.</p>
+<h2 id="implementation-details">Implementation Details<a hidden class="anchor" aria-hidden="true" href="#implementation-details">#</a></h2>
+<p>I used an initial Sequential Block consisting of 3 CNN layers followed
+by two linear layers with 512 hidden number of units for the Value
+function and Q-Value Function stream. The results show a comparison of a
+Deep DQN with a Dueling DQN over 6 million environment interactions for
+Breakout and Enduro.</p>
+<p>The choice of these two games is intentional. Dueling does not impact
+the performance of the agent in Breakout. The authors of the original paper on
+Dueling Networks [1] point out that the benefit of using dueling
+network increases with large action space over using single stream of
+state-action function. It is intuitive to expect better estimates of the
+state functions with more frequent updates coming for state-action
+pairs. This is evident in the performance with Dueling for Enduro.</p>
+<figure id="fig:comparison">
+<figure id="fig:breakout">
+<span class="image placeholder" data-original-image-src="Breakout.png"
+data-original-image-title="" width="\textwidth"></span>
+<figcaption>Breakout</figcaption>
+</figure>
+<figure id="fig:enduro">
+<span class="image placeholder" data-original-image-src="enduro.png"
+data-original-image-title="" width="\textwidth"></span>
+<figcaption>Enduro</figcaption>
+</figure>
+<figcaption>Comparison of Dueling Network</figcaption>
+</figure>
+<p><small> Author Note</p>
+<p>Feel free to reach out if you:</p>
+<p>1. Have any questions or get stuck implementing the ideas discussed in
+this article - I&rsquo;m happy to help.</p>
+<p>2. Are a student seeking guidance on topics related to school,
+research, or reinforcement learning - I welcome your questions and will
+do my best to answer them.</p>
+<p>3. Use of generative AI: No other part of this article was generated
+using generative AI tools, except for this author note (:P). </small></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jasmeetkaur9.github.io/tags/reinforcement-learning/">Reinforcement Learning</a></li>
+      <li><a href="https://jasmeetkaur9.github.io/tags/research-practice/">Research Practice</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2025 <a href="https://jasmeetkaur9.github.io/">Jasmeet Kaur</a></span> ·     
+    <span>
+    Powered by 
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/pmichaillat/hugo-website/" rel="noopener" target="_blank">a modified version</a>
+         of 
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+</html>
