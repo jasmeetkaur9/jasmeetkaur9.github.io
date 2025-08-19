@@ -18,17 +18,17 @@ decided to write a short guide that walks through the concepts, motivation and
 details of this implementation.
 
 The overall problem is about sequential decision making where an agent
-interacts with an environment and with the goal to maximize cumulative reward
+interacts with an environment with the goal of maximizing cumulative reward
 in the environment. A formal description of this problem (a framework called MDP) includes
-a state space, an action space, reward function, transition function of
-the environment. Q-learning is one method that helps to achieve part of
-this goal in cases when an agent is in a discrete action space. The key idea of
+a state space, an action space, a reward function and a transition function of
+the environment. Q-learning is one method that helps achieve part of
+this goal in environments with a discrete action space. The key idea of
 this algorithm is to capture how good it is to be in a state and take a
-particular action.This is termed as the Q-value. This is followed by taking an action in a given state that maximizes this
+particular action. This quantity is called the Q-value. Then, the agent selects an action in a given state that maximizes this
 value. 
 
-If $Q(s_t, a_t)$ captures this value for a state-action pair, a general
-update using Q-learning for a state-action pair at time t is given as follows (Eq 6.8
+If $Q(s_t, a_t)$ denotes this value for a state-action pair, a general
+update using Q-learning for a state-action pair, at time t, is given as follows (Eq 6.8
 \[1\]):
 $$Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[ r_{t+1} + \gamma \max_{a'} Q\left(s_{t+1}, a'\right) - Q(s_t, a_t) \right]$$
 Although one selects an action that maximizes the Q-value, using the
@@ -42,7 +42,7 @@ $$Q_1(s_t, a_t) \leftarrow Q_1(s_t, a_t) + \alpha \left[ r_{t+1} + \gamma Q_2\le
 Q-learning or Double Q-learning are used in the tabular case when the
 environment is small. But as the size of the environment, state space
 and action space increases, function approximators like deep networks
-come handy to generalize learning over the state and action space. The function
+come in handy to generalize learning over the state and action space. The function
 approximator usually outputs the Q-value of a state-action pair. This value captures
 the return by learning from a series of episodes of
 environment interactions. Deep Networks help scale learning to large
@@ -75,10 +75,10 @@ function stream and Q-Value function stream. The results compare
 Double DQN Agent with a Dueling Double DQN Agent over 6 million environment interactions for
 Breakout and Enduro.
 
-The figures below show a moving avergae of 100 episode rewards. The choice of these two games is intentional. Dueling does not impact
+The figures below show a moving average of 100-episode rewards. The choice of these two games is intentional. Dueling does not impact
 the performance of the agent in Breakout. This is shown in the first figure. The authors of the original paper on
 Dueling Networks \[2\] point out that the benefit of using dueling
-network increases with large action space over using single stream of
+network increases with large action space compared using single stream of
 state-action function. It is intuitive to expect better estimates of the
 state functions when more frequent updates are coming for state-action
 pairs. Since Enduro has a larger action space, this is evident in the performance of Dueling Double DQN Agent in the second image.
