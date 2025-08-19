@@ -1,5 +1,5 @@
 ---
-title: "A Duel for the win."
+title: "A duel for the win."
 date: 2025-08-19
 lastmod: 2025-08-19
 tags: ["Reinforcement Learning", "Research Practice"]
