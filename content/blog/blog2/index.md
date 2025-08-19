@@ -92,13 +92,10 @@ pairs. Since Enduro has a larger action space, this is evident in the performanc
 1. Sutton, R. S., & Barto, A. G. (2018). Reinforcement learning: An introduction (2nd ed.). MIT Press.
 2. Wang, Z., Schaul, T., Hessel, M., Van Hasselt, H., Lanctot, M., & De Freitas, N. (2016). Dueling network architectures for deep reinforcement learning. In International Conference on Machine Learning (ICML) (pp. 1995–2003).
 
-<small><i>Author Note
-
+<small><i>Note :
 Feel free to reach out if you:
-1\. Have any questions or get stuck implementing the ideas discussed in
-this article - I'm happy to help.
-2\. Are a student seeking guidance on topics related to
-research and reinforcement learning - I welcome your questions and will
-do my best to answer them.
-Use of generative AI: No other part of this article was generated
-using generative AI tools, except for this author note (:P).</i> </small>
+1. Get stuck implementing the ideas discussed in this article or have any questions.
+2. Are a student seeking answers to questions related to
+research and reinforcement learning - I will do my best to answer them.
+Use of generative AI: No part of this article was generated
+using generative AI tools.</i> </small>
