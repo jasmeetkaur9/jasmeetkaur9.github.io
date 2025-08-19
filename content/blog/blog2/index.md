@@ -75,7 +75,7 @@ function and Q-Value Function stream. The results show a comparison of a
 Deep DQN with a Dueling DQN over 6 million environment interactions for
 Breakout and Enduro.
 
-The choice of these two games is intentional. Dueling does not impact
+The figures below show a moving avergae of 100 episode rewards. The choice of these two games is intentional. Dueling does not impact
 the performance of the agent in Breakout. This is shown in the first image. The authors of the original paper on
 Dueling Networks \[1\] point out that the benefit of using dueling
 network increases with large action space over using single stream of
@@ -92,7 +92,7 @@ pairs. This is evident in the performance with Dueling for Enduro in the second 
 1. Sutton, R. S., & Barto, A. G. (2018). Reinforcement learning: An introduction (2nd ed.). MIT Press.
 2. Wang, Z., Schaul, T., Hessel, M., Van Hasselt, H., Lanctot, M., & De Freitas, N. (2016). Dueling network architectures for deep reinforcement learning. In International Conference on Machine Learning (ICML) (pp. 1995–2003).
 
-<small> Author Note
+<small><i>Author Note
 
 Feel free to reach out if you:
 
@@ -103,5 +103,5 @@ this article - I'm happy to help.
 research, or reinforcement learning - I welcome your questions and will
 do my best to answer them.
 
-3\. Use of generative AI: No other part of this article was generated
-using generative AI tools, except for this author note (:P). </small>
+Use of generative AI: No other part of this article was generated
+using generative AI tools, except for this author note (:P).</i> </small>
