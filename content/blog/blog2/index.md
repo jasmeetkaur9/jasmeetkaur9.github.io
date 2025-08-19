@@ -55,7 +55,7 @@ for each state and action pair, the output from CNN is split into two
 streams. One of these outputs the value of a state, $V(s)$ and the other
 outputs the advantage of taking an action in that state, $A(s,a)$. The
 expected value of this advantage function is zero. This can be included
-by adding this expected value as an regularization to help improve the stability.
+by adding this expected value as a regularization to help improve the stability.
 
 $$A(s, a) = Q(s, a) - V(s)$$
 $$\mathbf{E}_{a \sim \pi(a|s)}[A(s, a)] = 0$$
