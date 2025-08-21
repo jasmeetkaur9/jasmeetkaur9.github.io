@@ -10,9 +10,9 @@
     <atom:link href="https://jasmeetkaur9.github.io/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>From Paper to Prototype</title>
-      <link>https://jasmeetkaur9.github.io/blog/blog1/</link>
+      <link>https://jasmeetkaur9.github.io/blog/researchpractice/</link>
       <pubDate>Wed, 28 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://jasmeetkaur9.github.io/blog/blog1/</guid>
+      <guid>https://jasmeetkaur9.github.io/blog/researchpractice/</guid>
       <description>This article provides a practical guide for learning to implement a researcch paper in reinforcement learning.</description>
     </item>
   </channel>

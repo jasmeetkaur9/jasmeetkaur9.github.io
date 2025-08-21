@@ -18,7 +18,7 @@ decided to write a short guide that walks through the concepts, motivation and
 details of this implementation.
 
 The overall problem is about sequential decision making where an agent
-interacts with an environment with the goal of maximizing cumulative reward
+interacts with an environment with the goal of maximizing expected cumulative reward
 in the environment. A formal description of this problem (a framework called MDP) includes
 a state space, an action space, a reward function and a transition function of
 the environment. Q-learning is one method that helps achieve part of
@@ -44,7 +44,7 @@ environment is small. But as the size of the environment, state space
 and action space increases, function approximators like deep networks
 come in handy to generalize learning over the state and action space. The function
 approximator usually outputs the Q-value of a state-action pair. This value captures
-the return by learning from a series of episodes of
+the expected return by learning from a series of episodes of
 environment interactions. Deep Networks help scale learning to large
 MDPs. In this article, I discuss the benefits of using a specific
 architecture called a Dueling Network with Double Deep Q-Learning and show
@@ -55,7 +55,7 @@ for each state and action pair, the output from CNN is split into two
 streams. One of these outputs the value of a state, $V(s)$ and the other
 outputs the advantage of taking an action in that state, $A(s,a)$. The
 expected value of this advantage function is zero. This can be included
-by adding this expected value as a regularization to help improve the stability.
+by adding this expected value as a regularization to help improve the stability [2].
 
 $$A(s, a) = Q(s, a) - V(s)$$
 $$\mathbf{E}_{a \sim \pi(a|s)}[A(s, a)] = 0$$
@@ -69,7 +69,7 @@ for more stable learning.
 
 ## Implementation Details
 
-I used an initial Sequential Block consisting of 3 CNN layers followed
+I used an initial Sequential Block consisting of three CNN layers followed
 by two linear layers with 512 hidden number of units for the Value
 function stream and Q-Value function stream. The results compare
 Double DQN Agent with a Dueling Double DQN Agent over 6 million environment interactions for
@@ -78,12 +78,12 @@ Breakout and Enduro.
 The figures below show a moving average of 100-episode rewards. The choice of these two games is intentional. Dueling does not impact
 the performance of the agent in Breakout. This is shown in the first figure. The authors of the original paper on
 Dueling Networks \[2\] point out that the benefit of using dueling
-network increases with large action space compared using single stream of
-state-action function. It is intuitive to expect better estimates of the
-state functions when more frequent updates are coming for state-action
-pairs. Since Enduro has a larger action space, this is evident in the performance of Dueling Double DQN Agent in the second image.
+network compared to using single stream of state-action function increases 
+with large action space. More frequent updates using state-action pairs lead 
+to learning better estimates of the value function as compared to learning state-value function.
+Since Enduro has a larger action space, this is evident in the performance of Dueling Double DQN Agent in the second image.
 
-![Breakout](Breakout.png)
+![Breakout](breakout.png)
 ![Enduro](enduro.png)
 
 
