@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>A duel for the win. | Jasmeet Kaur</title>
 <meta name="keywords" content="Reinforcement Learning, Research Practice">
 <meta name="description" content="A short guide that walks through the understanding and implementing Dueling DDQN.">
 <meta name="author" content="Jasmeet Kaur">
-<link rel="canonical" href="https://jasmeetkaur9.github.io/blog/dddqn/">
+<link rel="canonical" href="http://localhost:1313/blog/dddqn/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.e690afcd5c523330d5c8b4d746eb158361600a015e99518d4d246a6ccab0cc19.css" integrity="sha256-5pCvzVxSMzDVyLTXRusVg2FgCgFemVGNTSRqbMqwzBk=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://jasmeetkaur9.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://jasmeetkaur9.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://jasmeetkaur9.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://jasmeetkaur9.github.io/apple-touch-icon.png">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://jasmeetkaur9.github.io/blog/dddqn/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/blog/dddqn/">
 <noscript>
     <style>
         #theme-toggle,
@@ -26,100 +27,7 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="A duel for the win." />
-<meta property="og:description" content="A short guide that walks through the understanding and implementing Dueling DDQN." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://jasmeetkaur9.github.io/blog/dddqn/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2025-08-19T00:00:00+00:00" />
-<meta property="article:modified_time" content="2025-08-19T00:00:00+00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="A duel for the win."/>
-<meta name="twitter:description" content="A short guide that walks through the understanding and implementing Dueling DDQN."/>
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Blogs",
-      "item": "https://jasmeetkaur9.github.io/blog/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "A duel for the win.",
-      "item": "https://jasmeetkaur9.github.io/blog/dddqn/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "A duel for the win.",
-  "name": "A duel for the win.",
-  "description": "A short guide that walks through the understanding and implementing Dueling DDQN.",
-  "keywords": [
-    "Reinforcement Learning", "Research Practice"
-  ],
-  "articleBody": "Dueling Double Deep Q-Learning Recently, I needed to implement a Dueling Double Q-learning Agent and decided to write a short guide that walks through the concepts, motivation and details of this implementation.\nThe overall problem is about sequential decision making where an agent interacts with an environment with the goal of maximizing expected cumulative reward in the environment. A formal description of this problem (a framework called MDP) includes a state space, an action space, a reward function and a transition function of the environment. Q-learning is one method that helps achieve part of this goal in environments with a discrete action space. The key idea of this algorithm is to capture how good it is to be in a state and take a particular action. This quantity is called the Q-value. Then, the agent selects an action in a given state that maximizes this value.\nIf $Q(s_t, a_t)$ denotes this value for a state-action pair, a general update using Q-learning for a state-action pair, at time t, is given as follows (Eq 6.8 [1]): $$Q(s_t, a_t) \\leftarrow Q(s_t, a_t) + \\alpha \\left[ r_{t+1} + \\gamma \\max_{a’} Q\\left(s_{t+1}, a’\\right) - Q(s_t, a_t) \\right]$$ Although one selects an action that maximizes the Q-value, using the maximum of an estimate for an estimate of the maximum value leads to a positive bias. To avoid this problem of maximization bias, another algorithm called the Double Q-Learning with two separate Q-tables (in the tabular case) uses the following update for improved stability (Eq 6.10 [1]):\n$$Q_1(s_t, a_t) \\leftarrow Q_1(s_t, a_t) + \\alpha \\left[ r_{t+1} + \\gamma Q_2\\left(s_{t+1}, \\arg\\max_{a} Q_1(s_{t+1}, a)\\right) - Q_1(s_t, a_t) \\right]$$\nQ-learning or Double Q-learning are used in the tabular case when the environment is small. But as the size of the environment, state space and action space increases, function approximators like deep networks come in handy to generalize learning over the state and action space. The function approximator usually outputs the Q-value of a state-action pair. This value captures the expected return by learning from a series of episodes of environment interactions. Deep Networks help scale learning to large MDPs. In this article, I discuss the benefits of using a specific architecture called a Dueling Network with Double Deep Q-Learning and show its performance for two Atari games.\nFor Atari games, the input is processed through a CNN as it consists of frames of visual data. Instead of outputting the Q-value for each state and action pair, the output from CNN is split into two streams. One of these outputs the value of a state, $V(s)$ and the other outputs the advantage of taking an action in that state, $A(s,a)$. The expected value of this advantage function is zero. This can be included by adding this expected value as a regularization to help improve the stability [2].\n$$A(s, a) = Q(s, a) - V(s)$$ $$\\mathbf{E}_{a \\sim \\pi(a|s)}[A(s, a)] = 0$$\n$$Q(s, a) = V(s) + \\left( A(s, a) - \\frac{1}{|\\mathcal{A}|} \\sum_{a’} A(s, a’) \\right)$$ The original paper on Dueling Network Architectures [2] suggests the following update for Q-function for an optimal policy. $$Q(s, a) = V(s) + \\left( A(s, a) - \\max_{a’} A(s, a’) \\right)$$ For the implementations as a part of this article, I used the first update for more stable learning.\nImplementation Details I used an initial Sequential Block consisting of three CNN layers followed by two linear layers with 512 hidden number of units for the Value function stream and Q-Value function stream. The results compare Double DQN Agent with a Dueling Double DQN Agent over 6 million environment interactions for Breakout and Enduro.\nThe figures below show a moving average of 100-episode rewards. The choice of these two games is intentional. Dueling does not impact the performance of the agent in Breakout. This is shown in the first figure. The authors of the original paper on Dueling Networks [2] point out that the benefit of using dueling network compared to using single stream of state-action function increases with large action space. More frequent updates using state-action pairs lead to learning better estimates of the value function as compared to learning state-value function. Since Enduro has a larger action space, this is evident in the performance of Dueling Double DQN Agent in the second image.\nReferences Sutton, R. S., \u0026 Barto, A. G. (2018). Reinforcement learning: An introduction (2nd ed.). MIT Press. Wang, Z., Schaul, T., Hessel, M., Van Hasselt, H., Lanctot, M., \u0026 De Freitas, N. (2016). Dueling network architectures for deep reinforcement learning. In International Conference on Machine Learning (ICML) (pp. 1995–2003). Note : Feel free to reach out if you:\nGet stuck implementing the ideas discussed in this article or have any questions. Are a student seeking answers to questions related to research and reinforcement learning - I will do my best to answer them. Use of generative AI: No part of this article was generated using generative AI tools. ",
-  "wordCount" : "816",
-  "inLanguage": "en",
-  "datePublished": "2025-08-19T00:00:00Z",
-  "dateModified": "2025-08-19T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": "Jasmeet Kaur"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://jasmeetkaur9.github.io/blog/dddqn/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Jasmeet Kaur",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://jasmeetkaur9.github.io/favicon.ico"
-    }
-  }
-}
-</script>
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
-  onload="renderMathInElement(document.body);"></script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-          delimiters: [
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false},
-            {left: "\\begin{equation}", right: "\\end{equation}", display: true},
-            {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
-            {left: "\\begin{align}", right: "\\end{align}", display: true},
-            {left: "\\begin{align*}", right: "\\end{align*}", display: true},
-            {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},
-            {left: "\\begin{gather}", right: "\\end{gather}", display: true},
-            {left: "\\begin{CD}", right: "\\end{CD}", display: true},
-          ],
-          throwOnError : false
-        });
-    });
-</script>
- 
-
-
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -127,44 +35,42 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://jasmeetkaur9.github.io/" accesskey="h" title="Jasmeet Kaur">
-                <img src="https://jasmeetkaur9.github.io/favicon.ico" alt="" aria-label="logo"
-                    height="18"
-                    width="18">Jasmeet Kaur</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Jasmeet Kaur (Alt + H)">
+                <img src="http://localhost:1313/favicon.ico" alt="" aria-label="logo"
+                    height="18">Jasmeet Kaur</a>
             <div class="logo-switches">
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://jasmeetkaur9.github.io/publications/" title="Publications">
+                <a href="http://localhost:1313/publications/" title="Publications">
                     <span>Publications</span>
                 </a>
             </li>
             <li>
-                <a href="https://jasmeetkaur9.github.io/about/" title="About">
+                <a href="http://localhost:1313/about/" title="About">
                     <span>About</span>
                 </a>
             </li>
             <li>
-                <a href="https://jasmeetkaur9.github.io/projects/" title="Projects">
+                <a href="http://localhost:1313/projects/" title="Projects">
                     <span>Projects</span>
                 </a>
             </li>
             <li>
-                <a href="https://jasmeetkaur9.github.io/collabs/" title="Collabs">
+                <a href="http://localhost:1313/collabs/" title="Collabs">
                     <span>Collabs</span>
                 </a>
             </li>
             <li>
-                <a href="https://jasmeetkaur9.github.io/blog/" title="Blog">
+                <a href="http://localhost:1313/blog/" title="Blog">
                     <span>Blog</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
-
-    <main class="main">
+<main class="main">
 
 <article class="post-single">
   <header class="post-header">
@@ -172,7 +78,10 @@
     <h1 class="post-title entry-hint-parent">
       A duel for the win.
     </h1>
-    <div class="post-meta"><span title='2025-08-19 00:00:00 +0000 UTC'>August 2025</span>&nbsp;&middot;&nbsp;Jasmeet Kaur
+    <div class="post-description">
+      A short guide that walks through the understanding and implementing Dueling DDQN.
+    </div>
+    <div class="post-meta"><span title='2025-08-19 00:00:00 +0000 UTC'>August 2025</span>&nbsp;·&nbsp;Jasmeet Kaur
 
 </div>
   </header> 
@@ -260,20 +169,19 @@ using generative AI tools.</i> </small></p>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://jasmeetkaur9.github.io/tags/reinforcement-learning/">Reinforcement Learning</a></li>
-      <li><a href="https://jasmeetkaur9.github.io/tags/research-practice/">Research Practice</a></li>
+      <li><a href="http://localhost:1313/tags/reinforcement-learning/">Reinforcement Learning</a></li>
+      <li><a href="http://localhost:1313/tags/research-practice/">Research Practice</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2025 <a href="https://jasmeetkaur9.github.io/">Jasmeet Kaur</a></span> ·     
+        <span>&copy; 2025 <a href="http://localhost:1313/">Jasmeet Kaur</a></span> · 
+
     <span>
-    Powered by 
+        Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/pmichaillat/hugo-website/" rel="noopener" target="_blank">a modified version</a>
-         of 
         <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
@@ -355,4 +263,5 @@ using generative AI tools.</i> </small></p>
     });
 </script>
 </body>
+
 </html>

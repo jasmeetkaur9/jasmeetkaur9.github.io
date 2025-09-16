@@ -2,25 +2,43 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Blogs on Jasmeet Kaur</title>
-    <link>https://jasmeetkaur9.github.io/blog/</link>
+    <link>http://localhost:1313/blog/</link>
     <description>Recent content in Blogs on Jasmeet Kaur</description>
-    <generator>Hugo -- 0.135.0</generator>
+    <generator>Hugo -- 0.150.0</generator>
     <language></language>
     <lastBuildDate>Tue, 19 Aug 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://jasmeetkaur9.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A duel for the win.</title>
-      <link>https://jasmeetkaur9.github.io/blog/dddqn/</link>
+      <link>http://localhost:1313/blog/dddqn/</link>
       <pubDate>Tue, 19 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>https://jasmeetkaur9.github.io/blog/dddqn/</guid>
+      <guid>http://localhost:1313/blog/dddqn/</guid>
       <description>A short guide that walks through the understanding and implementing Dueling DDQN.</description>
     </item>
     <item>
       <title>From Paper to Prototype</title>
-      <link>https://jasmeetkaur9.github.io/blog/researchpractice/</link>
+      <link>http://localhost:1313/blog/researchpractice/</link>
       <pubDate>Wed, 28 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://jasmeetkaur9.github.io/blog/researchpractice/</guid>
+      <guid>http://localhost:1313/blog/researchpractice/</guid>
       <description>This article provides a practical guide for learning to implement a researcch paper in reinforcement learning.</description>
+    </item>
+    <item>
+      <title>Pre-training in Reinforcement Learning: Data, Curiosity and Structure</title>
+      <link>http://localhost:1313/blog/mentalnotes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/mentalnotes/</guid>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Label-free learning has enabled recent progress in learning from large
+amounts of data. Advancements in Large Language Models showcase the
+effectiveness of learning the generative process from huge amounts of
+text data. This also pushed learning without labels or learning from
+auxiliary labels in some of the sub-fields of Reinforcement Learning
+([@park2024foundation], [@rudolph2024learning], [@li2023accelerating],
+[@ma2022vip], etc.). This article provides a focused study of different
+works unified by data-driven objectives. It filters the entire
+discussion of using data into two different perspectives. First is
+learning driven by curiosity to explore the dataset, and the second is
+to learn the underlying core information.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

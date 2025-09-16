@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Research Practice on Jasmeet Kaur</title>
-    <link>https://jasmeetkaur9.github.io/tags/research-practice/</link>
+    <link>http://localhost:1313/tags/research-practice/</link>
     <description>Recent content in Research Practice on Jasmeet Kaur</description>
-    <generator>Hugo -- 0.135.0</generator>
+    <generator>Hugo -- 0.150.0</generator>
     <language></language>
     <lastBuildDate>Tue, 19 Aug 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://jasmeetkaur9.github.io/tags/research-practice/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/research-practice/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A duel for the win.</title>
-      <link>https://jasmeetkaur9.github.io/blog/dddqn/</link>
+      <link>http://localhost:1313/blog/dddqn/</link>
       <pubDate>Tue, 19 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>https://jasmeetkaur9.github.io/blog/dddqn/</guid>
+      <guid>http://localhost:1313/blog/dddqn/</guid>
       <description>A short guide that walks through the understanding and implementing Dueling DDQN.</description>
     </item>
     <item>
       <title>From Paper to Prototype</title>
-      <link>https://jasmeetkaur9.github.io/blog/researchpractice/</link>
+      <link>http://localhost:1313/blog/researchpractice/</link>
       <pubDate>Wed, 28 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://jasmeetkaur9.github.io/blog/researchpractice/</guid>
+      <guid>http://localhost:1313/blog/researchpractice/</guid>
       <description>This article provides a practical guide for learning to implement a researcch paper in reinforcement learning.</description>
     </item>
   </channel>

@@ -1,6 +1,7 @@
 baseURL: "https://jasmeetkaur9.github.io/" 
 title: Jasmeet Kaur
-paginate: 20
+pagination:
+  pagerSize: 20
 theme: PaperMod
 
 enableInlineShortcodes: true
@@ -97,6 +98,8 @@ params:
       text: "Jasmeet Kaur"
       icon: favicon.ico
       iconHeight: 18
+
+    
 
 markup:
     goldmark:

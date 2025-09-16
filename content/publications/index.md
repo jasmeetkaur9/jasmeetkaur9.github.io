@@ -1,3 +1,8 @@
+---
+title: "Publications"
+featured_image: "/images/picture.jpeg"
+---
+
 #### Publications
 
 - **Entropy-regularized Gradient Estimators for Approximate Bayesian Inference**  
