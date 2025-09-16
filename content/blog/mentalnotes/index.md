@@ -1,7 +1,7 @@
 ---
 title: "Pre-training in Reinforcement Learning: Data, Curosity and Structure"
-date: 2025-08-19
-lastmod: 2025-08-19
+date: 2025-09-16
+lastmod: 2025-09-16
 tags: ["Reinforcement Learning", "Research Practice"]
 author: "Jasmeet Kaur"
 description: "Data, Curosity and Structure."
@@ -498,7 +498,7 @@ and dummy actions $\tilde{a}_H$ in the dataset $D$, conditioned on goal
 $g$. This method has been effective for zero-shot generalization in
 goal-conditioned reinforcement learning.
 
-# Conclusion
+### Conclusion
 
 This article provides an overview of recent research trends in RL. It
 looks at different works using unsupervised and self-supervised methods
@@ -518,14 +518,20 @@ metric using probability distributions is a bottleneck. Contrastive
 Learning provides a sample-efficient way to learn representations that
 are close to positive samples and distant from negative samples.
 
-# Use of Generative AI
+### Use of Generative AI
 
 LaTeX code for equations has been modified from templates generated with
 the help of ChatGPT (OpenAI). In addition, it has been used to assist in
 finding word phrasing. The text was proofread using Grammarly's basic
 grammar and style suggestions, without the use of AI-generated content.
 
-# References 
+### Citation 
+If you found this useful in your academic work, please cite this using:
+
+Kaur, Jasmeet. Pre-Training in Reinforcement Learning: Data, Curiosity and Structure. https://jasmeetkaur9.github.io/blog/mentalnotes/.
+
+
+### References 
 
 1. Siddhant Agarwal, Harshit Sikchi, Peter Stone, and Amy Zhang. Proto
 successor measure: Representing the behavior space of an rl agent.
