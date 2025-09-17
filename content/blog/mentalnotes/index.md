@@ -27,10 +27,9 @@ to learn the underlying core information.
 This discussion is motivated by works that focus on data invariant to
 task-relevant information ([27], [22], [18], [12],
 etc.). This discussion highlights the type of underlying structure that
-exists in the data, what are the ways to learn about this structure, and
+exists in the data, what are the ways to learn this structure, and
 how to adapt these insights to solve downstream tasks with minimal
-intervention. The aim is to give an integrated understanding of these
-works while providing insights that pave the way for future research.
+intervention.
 
 Prevailing practices demonstrate that the availability of large data has
 made its use and scientific consideration inevitable. But not all data
@@ -42,15 +41,9 @@ efficient. Utilizing data is beneficial in cases where interacting with
 the environment during deployment is not possible.
 
 Most of the papers covered under the discussion presented here are works
-in unsupervised and self-supervised pre-training. Some works that lay
-the foundation of such approaches have also been described in the
-relevant sections. This analysis has been divided into four main
+in unsupervised and self-supervised pre-training. This analysis has been divided into four main
 sections. Each section covers a pre-training objective that is motivated
-by the two main factors described above. Most recent works cover these
-two motivations independently. This article does not propose a novel
-method to solve any problem, but offers an organized discussion.
-
-The focus for each section is as follows: exploring datasets for solving
+by the two main factors described above. The focus for each section is as follows: exploring datasets for solving
 downstream tasks with minimal or no adaptation, learning representations
 that capture structure in environmental dynamics, learning
 representations that capture similar functional behavior within an
@@ -110,16 +103,10 @@ exploratory policy is not enough, and disentangling exploration from
 underlying dynamics is important. One way to do this is to train an
 ensemble of policies and use the exploratory policy to find actions in
 the environment when the ensemble fails to agree on an action
-([27]). The objective maximized over a horizon T,
-becomes:
-
-The expectation is over different MDPs sampled from a distribution. This
-objective learns a policy that equally visits all the states during the
-episodes ([27]). Since sampling from the
-state-visitation distribution is not trivial, entropy can be computed by
+([27]). This objective learns a policy that equally visits all the states during the
+episodes ([27]). Since sampling from the state-visitation distribution is not trivial, entropy can be computed by
 a particle-based k-nearest neighbor approximation
-([27], [23]). For practical
-implementation, ([27]) treats the objective as a
+([27], [23]). For practical implementation, ([27]) treats the objective as a
 reward to be optimized for by training an agent with PPO.
 
 Evidently, the Max-Entropy trained policy shows a small generalization
@@ -152,7 +139,7 @@ equivalence between temporal distance and the optimal goal-conditioned
 value function. This representation is used to learn a policy that spans
 the latent space and captures diverse skills in the offline data
 ([16]). Few-shot adaptation to the downstream can be
-achieved by learning the task-dependent latent variable.
+achieved by learning the task-dependent information.
 
 Curiosity-driven objectives can be used to improve online data
 collection and online exploration for new tasks. Such objectives are
@@ -167,7 +154,7 @@ rapid exploration in challenging sparse-reward domains such as the
 AntMaze domain, Adroit hand manipulation, and a visually simulated
 robotic manipulation domain.
 
-Such an objective built upon offline data can be used to improve online
+Such objects built upon offline data can be used to improve online
 exploration. The key idea of this is to extract the low-level skills
 using a variational encoder. The posterior is conditioned by a prior to
 stay close to the offline dataset. Learn a low-level policy to take
@@ -232,7 +219,7 @@ $Q^{\pi}_{z,r} = F_zBr$ ([21]).
 
 Learning the span of policies does not have to be restricted to optimal
 policies. Successor Measure can be used to learn representations in the
-entire space of policies. Following from the Bellman Flow equations of
+entire space of policies. Following the Bellman Flow equations of
 successor measure, the solutions to these exist if it is an affine
 combination. For practical implementation, this constrained optimization
 problem can be transformed into a single-player game in
@@ -281,9 +268,6 @@ $$
 $$
 \big[ \cos_{\phi}(s', t') \big]
 $$
-
-
-
 
 
 Aforementioned methods provide objectives to learn effective
