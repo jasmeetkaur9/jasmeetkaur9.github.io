@@ -8,6 +8,7 @@ description: "Data, Curosity and Structure."
 summary: "A short review highlight on recent works."
 showToc: false
 disableAnchoredHeadings: false
+math: true
 ---
 
 # Introduction
