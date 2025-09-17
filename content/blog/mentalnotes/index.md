@@ -1,14 +1,14 @@
 ---
-title: "Pre-training in Reinforcement Learning: Data, Curosity and Structure"
+title: "Pre-training in Reinforcement Learning: Data, Curiosity and Structure"
 date: 2025-09-16
+math: true
 lastmod: 2025-09-16
 tags: ["Reinforcement Learning", "Research Practice"]
 author: "Jasmeet Kaur"
-description: "Data, Curosity and Structure."
+description: "Data, Curiosity and Structure."
 summary: "A short review highlight on recent works."
 showToc: false
 disableAnchoredHeadings: false
-math: true
 ---
 
 # Introduction
@@ -111,15 +111,20 @@ underlying dynamics is important. One way to do this is to train an
 ensemble of policies and use the exploratory policy to find actions in
 the environment when the ensemble fails to agree on an action
 ([27]). The objective maximized over a horizon T,
-becomes: $$\begin{align}
+becomes:
+$$
+\begin{align}
 R_T(\pi) 
 &= \mathbb{E}_{\mathcal{M} \sim \hat{P}(\mathcal{M})}
   \left[ \emph{H}( d_{T, \pi}(s)) \right] \\
 &= \mathbb{E}_{\mathcal{M} \sim \hat{P}(\mathcal{M})}
   \left[
     \emph{H}\!\left( \frac{1}{T} \sum_{t=0}^{T} d_{t,\pi}(s) \right)
-  \right].
-\end{align}$$
+  \right]
+\end{align}
+$$
+
+
 
 The expectation is over different MDPs sampled from a distribution. This
 objective learns a policy that equally visits all the states during the
@@ -237,9 +242,9 @@ entire family of policies can be parametrized with z, and the Q-function
 is used to learn the optimal policies. Learning the successor measure
 representation for all z allows for adaptation to any reward function.
 For each $z$, find $d \times (S \times A)$-matrices $F_z$ and $B$ such
-that the matrix $M^{\pi}_z$ is $M^{\pi}_z = F_z^{\top} B$. Then, for a
+that the matrix $M^{\pi}_z$ is $M^{\pi}_z = F_z B$. Then, for a
 reward function $r$, the action-value function is given by
-$Q^{\pi}_{z,r} = F_z^{\top} B\,r$ ([21]).
+$Q^{\pi}_{z,r} = F_zBr$ ([21]).
 
 Learning the span of policies does not have to be restricted to optimal
 policies. Successor Measure can be used to learn representations in the
@@ -277,7 +282,7 @@ two dissimilar states end up with the same representations. One way to
 mitigate this is to use cosine distance to measure the distance between
 two latent states ([25]). Efficiently computing the
 approximation to the Wasserstein distance is an open challenge.
-$$\begin{align}
+$$\begin{equation}
 \cos_{\phi}(x, y) 
 &= 1 - \frac{\phi(s)^\top \phi(t)}
         {\|\phi(s)\| \cdot \|\phi(t)\|},
@@ -287,7 +292,7 @@ F^{\pi}_{\cos\phi}(s, t)
    + \gamma \, \mathbb{E}_{s' \sim \hat{P}^{\pi}_s, \; t' \sim \hat{P}^{\pi}_t}
       \big[ \cos_{\phi}(s', t') \big].
 \label{eq:simsr}
-\end{align}$$
+\end{equation}$$
 
 Aforementioned methods provide objectives to learn effective
 representations efficiently using bisimulation metrics. The following
@@ -306,22 +311,22 @@ across analogous tasks. Given an MDP $M$, *goal-conditioned bisimulation
 relation* $\mathcal{B}$ can be defined ([10]). For
 all state - goal pairs $(s, g_s), (t, g_t) \in S \times G$ that are
 equivalent under $\mathcal{B}$, the following conditions hold:
-$$\begin{align}
+$$\begin{equation}
     R(s, a, g_s) &= R(t, a, g_t), \quad \forall a \in A \label{eq:reward-cond} \\
     P(G \mid s, a) &= P(G \mid t, a), \quad \forall a \in A, \; G \subseteq S. \label{eq:transition-cond}
-\end{align}$$
+\end{equation}$$
 
 For practical implementation, an *on-policy* version of this relation
-gives rise to a paired-state metric: $$\begin{align}
+gives rise to a paired-state metric: $$\begin{equation}
     d\big((s,g_s), (t,g_t)\big) 
     &= \big| R(s, \pi(s,g_s), g_s) - R(t, \pi(t,g_t), g_t) \big| \notag \\
     &\quad + W_2 \Big( P(\cdot \mid s, \pi(s,g_s)), \;
     P(\cdot \mid t, \pi(t,g_t)) \Big), \label{eq:metric}
-\end{align}$$ where $\pi$ is the goal-conditioned policy. The following
+\end{equation}$$ where $\pi$ is the goal-conditioned policy. The following
 objective can be used to learn state-goal representations and train an
 offline goal-conditioned policy. [10] used a
 dataset collected using a noisy expert to show skill transfer in
-manipulation tasks using such a bisim relation. $$\begin{align}
+manipulation tasks using such a bisim relation. $$\begin{equation}
 L_{\varphi} &= \biggl( \bigl\|
     \phi(s, g_s) - \phi(t, g_t)
 \bigr\|_1
@@ -330,7 +335,7 @@ L_{\varphi} &= \biggl( \bigl\|
     \overline{\phi}(s', g_s') - \overline{\phi}(t', g_t')
 \bigr\|_2
 \biggr)^2
-\end{align}$$
+\end{equation}$$
 
 A bisimulation objective can be appended with a forward model
 error-based intrinsic reward to improve exploration. This enhances
@@ -348,12 +353,12 @@ bisimulation metric can result in a value function that does not
 diverge. These representations stabilize TD-learning and are Bellman
 complete ([17]). [17] defines a
 $\pi$-bisimilarity kernel $k^{\pi_e} : S \times S \to \mathbb{R}$ for
-pairs of state-actions and under $\pi_e$: $$\begin{align}
+pairs of state-actions and under $\pi_e$: $$\begin{equation}
 k^{\pi_e}(s,a_s; t,a_t) 
 &= k_1(s,a_s; t,a_t) 
    + \gamma \, k_2\big(k^{\pi_e}\big)\big(P^{\pi_e}(\cdot|s,a_s), P^{\pi_e}(\cdot|t,a_t)\big),
 \label{eq:kpi} \\[1ex]
-\end{align}$$ Here, $k_1$ measures short-term similarity based on the
+\end{equation}$$ Here, $k_1$ measures short-term similarity based on the
 rewards received. $k_2$ measures long-term similarity between
 probability distributions by evaluating similarity between samples of
 the distributions according to $k^{\pi_e}$.
@@ -363,7 +368,7 @@ an incomplete dataset with missing transitions. While Implicit Q
 learning can be used to mitigate this problem
 ([10]), the error in the estimated value of bisim
 operator can be reduced by direct use of an expectile operator
-([26]). $$\begin{align}
+([26]). $$\begin{equation}
 F^{\pi_\beta} \phi^{\pi_\beta}(s, t) 
 &:= \arg\min_{\phi^{\pi_\beta}} 
 \;\; \mathbb{E}_{a_s \sim \pi_\beta(\cdot|s), \; a_t \sim \pi_\beta(\cdot|t)} \bigg[
@@ -376,7 +381,7 @@ F^{\pi_\beta} \phi^{\pi_\beta}(s, t)
     + \gamma \, \overline{\phi}^{\pi_\beta}(s', t') 
     - \phi^{\pi_\beta}(s,t) \;\Big].
 \label{eq:residual}
-\end{align}$$ For real-world deployment of bisimulation-based
+\end{equation}$$ For real-world deployment of bisimulation-based
 representations, naively training with adversarial states and actions
 for such cases does not transfer well to the downstream tasks
 ([24]). Learn robust representation with perturbed
@@ -391,12 +396,12 @@ can be learnt in a self-supervised way using bisimulation
 ([20]). The state-conditional action chunk (denoted by c)
 bisimulation metric is a function
 $d: \mathcal{S} \times \mathcal{C} \times \mathcal{C} \to \mathbb{R}_{\ge 0}$
-such that $$\begin{align}
+such that $$\begin{equation}
 d(c_i, c_j \mid s_t) 
 &= R^{c_i}_{s_t} - R^{c_j}_{s_t} 
    + \gamma \, W_2 \big( P^{c_i}_{s_t}, P^{c_j}_{s_t}; d_{c} \big),
 \label{eq:bisim_metric}
-\end{align}$$ where $d$ is a pseudometric and $W_2$ is the 2nd
+\end{equation}$$ where $d$ is a pseudometric and $W_2$ is the 2nd
 Wasserstein distance between two distributions. Here, $R^c_{s_t}$
 represents the cumulative discounted reward for executing chunk $c$
 starting at $s_t$ and $P^c_{s_t}$ represents the distribution of
@@ -406,18 +411,18 @@ effective for solving complex tasks. This is experimentally shown with
 not restricted to online interactions but can also be achieved from an
 offline dataset. To stabilize learning close to the behavioral policy
 and and mitigate distribution mismatch, the following objective can be
-used ([9]): $$\begin{align}
+used ([9]): $$\begin{equation}
 L(\phi) 
 &= \mathbb{E}_{s, a_i, r \sim \mathcal{D}, \; a_j \sim \mathcal{A}} 
    \Big[ \big\| \phi(a_{i}) - \phi(a_{j}) \big\|_1 - \hat{d}(a_i, a_j \mid s) \Big]^2,
 \label{eq:mod_obj}
-\end{align}$$ where $$\begin{align}
+\end{equation}$$ where $$\begin{equation}
 \hat{d}(a_i, a_j \mid s) 
 &= \big| r_{i} - \hat{R}(s, \phi(a_{j})) \big|
    + \gamma \, W_2 \big( \hat{P}(\cdot \mid s,  \phi(a_{i})), \hat{P}(\cdot \mid s,  \phi(a_{i})) \big)
    + p \cdot \hat{I}_\beta(a_j \mid s).
 \label{eq:estimated_d}
-\end{align}$$ Here, $d(a_i, a_j \mid s)$ is an estimate of the true
+\end{equation}$$ Here, $d(a_i, a_j \mid s)$ is an estimate of the true
 distance between actions conditioned on the same state $s$. $\hat{R}$
 and $\hat{P}$ are the learned reward and transition models, trained
 separately. $\hat{I}_\beta(a_j \mid s)$ is a trainable model predicting
@@ -426,24 +431,24 @@ whether $a_j$ is out-of-distribution.
 While the method above explicitly handles the behavioral distribution, a
 similar objective for single-step action representation, denoted by
 $\phi$, can be learnt independent of data-collecting policy. Such an
-action-bisimulation metric is defined as: $$\begin{align}
+action-bisimulation metric is defined as: $$\begin{equation}
 d_{\text{a-bisim}}(s_i, s_j, \phi, \varphi) 
 &= (1-c) \cdot \| \phi_(s_i) - \phi_(s_j) \|_1 
    + c \cdot \mathbb{E}_{a \sim \mathcal{U}(\mathcal{A})} 
        \Big[ W_1 \big( f(\varphi(s_i), a), f(\varphi_(s_j), a) \big) \Big],
 \label{eq:da_bisim}
-\end{align}$$ where $c \in [0,1]$ balances the contributions of the
+\end{equation}$$ where $c \in [0,1]$ balances the contributions of the
 state and action-conditional terms, $W_1$ denotes the 1st Wasserstein
 distance and $f$ is the trained forward model. The state representations
 are learnt by minimizing the $L_1$ distance between embedded
 representations $\varphi_(s_i)$ and $\varphi_(s_j)$ to the action-bisim
-metric ([18]): $$\begin{align}
+metric ([18]): $$\begin{equation}
 L(\mathcal{D}) 
 &= \frac{1}{N} \sum_{s_i, s_j \sim \mathcal{D}} 
    \Big| \| \varphi_(s_i) - \varphi_(s_j) \|_1 
    - d_{\text{a-bisim}}(s_i, s_j, \psi, \varphi) \Big|.
 \label{eq:da_bisim_loss}
-\end{align}$$
+\end{equation}$$
 
 Bisimulation can effectively capture the similarity between states. It
 can be adapted for offline datasets, online exploration, and learning
@@ -460,11 +465,11 @@ positives and negatives represent a set of keys with respect to a query
 captured ([12]). One of the most adapted ones is the
 InfoNCE loss function.
 
-$$\begin{align}
+$$\begin{equation}
 \mathcal{L}_{\text{contrastive}} &= 
 - \log \frac{\exp(\text{sim}(q, k^+)/\tau)}
        {\sum_{k \in \mathcal{K}} \exp(\text{sim}(q, k)/\tau)}
-\end{align}$$
+\end{equation}$$
 
 Here, $q$ is the query embedding, $k^+$ is the positive key embedding,
 $\mathcal{K}$ is the set of all keys in the mini-batch (positives and
@@ -479,9 +484,9 @@ Learning can be used to improve the robustness of bisimulation
 representation for transfer to downstream tasks. For this,
 [24] uses it for perturbing the negative samples.
 $P_{trb}$ in the following objective, Eq. 38, denotes the learnt
-perturbation parametrized by $\theta$. $$\begin{align}
+perturbation parametrized by $\theta$. $$\begin{equation}
 \mathcal{L}(\theta) &= - \phi \big( P_{trb}^i(s), P_{trb}^i(g) \big)^\top \phi\big( \langle s, g \rangle\big)^{-}
-\end{align}$$
+\end{equation}$$
 
 Finally, Contrastive Learning is effective for representations over
 offline image data. Learn representation over states using a
@@ -489,10 +494,10 @@ goal-conditioned offline pre-training objective as in [14]. The
 objective minimizes the distance between the goal-conditioned
 state-occupancy distribution of the policy and the data distribution.
 The dual of this objective yields a contrastive RL objective. The
-objective is: $$\begin{align}
+objective is: $$\begin{equation}
 \max_{\pi_T, \phi} \; & \mathbb{E}_{\pi_T} \Bigg[ \sum_t \gamma^t r(o; g) \Bigg] \nonumber \\
 & - D_{\mathrm{KL}}\big(d_{\pi_T}(o, a_T; g) \,\|\, d_D(o, \tilde{a}_T; g)\big),
-\end{align}$$ where $d_{\pi_H}(o, a_H; g)$ is the distribution over
+\end{equation}$$ where $d_{\pi_H}(o, a_H; g)$ is the distribution over
 observations and actions visited by the policy $\pi_H$ conditioned on
 goal $g$. $d_D(o, \tilde{a}_H; g)$ is the distribution over observations
 and dummy actions $\tilde{a}_H$ in the dataset $D$, conditioned on goal

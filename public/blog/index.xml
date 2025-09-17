@@ -9,11 +9,11 @@
     <lastBuildDate>Tue, 16 Sep 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Pre-training in Reinforcement Learning: Data, Curosity and Structure</title>
+      <title>Pre-training in Reinforcement Learning: Data, Curiosity and Structure</title>
       <link>http://localhost:1313/blog/mentalnotes/</link>
       <pubDate>Tue, 16 Sep 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/mentalnotes/</guid>
-      <description>Data, Curosity and Structure.</description>
+      <description>Data, Curiosity and Structure.</description>
     </item>
     <item>
       <title>A duel for the win.</title>
