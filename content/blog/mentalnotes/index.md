@@ -449,7 +449,6 @@ Kaur, Jasmeet. Pre-Training in Reinforcement Learning: Data, Curiosity and Struc
 
 
 ### References 
-
 1. Siddhant Agarwal, Harshit Sikchi, Peter Stone, and Amy Zhang. Proto
 successor measure: Representing the behavior space of an rl agent.
 *arXiv preprint arXiv:2411.19418*, 2024.
