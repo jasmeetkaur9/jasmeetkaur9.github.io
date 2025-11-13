@@ -74,7 +74,7 @@ $$
 L_\tau^2 \left[\hat{Q}_\theta(s, a) - V(s)\right]
 $$
 
-Finally, a policy is learned using the advantage weighted regressions using these value functions.
+Finally, a policy (parameterized here by phi) is learned using the advantage weighted regressions using these value functions.
 As described in the paper [1], expectile regression can be directly used on Q-value function. This is problematic because 
 this random variable now has stochasticity from the next states due to transition dynamics. A larger target value can be attributed to a bad action in a 
 good state rather than a good action over any given state. But learning the two value functions separetely avoids this problem.
@@ -123,8 +123,6 @@ Compute loss for the policy :
         loss_phi = torch.exp(0.05 * u_value)
         loss_phi = torch.mul(loss_phi, logprob) 
         loss_phi = torch.mean(loss_phi, dim = 0)
-       
-
 ```
 
 Total loss to optimize the three networks with 
@@ -152,3 +150,8 @@ Task : Adroit Hand Hammer
 1. Kostrikov, Ilya, Ashvin Nair, and Sergey Levine. "Offline reinforcement learning with implicit q-learning."
 2. [Implicit Q-Learning with TorchRL](https://minari.farama.org/tutorials/using_datasets/IQL_torchrl/)
 
+<small><i>Note :
+Feel free to reach out if you:
+1. Get stuck implementing the ideas discussed in this article or have any questions.
+Use of generative AI: No part of this article was generated
+using generative AI tools.</i> </small>
