@@ -5,7 +5,7 @@ lastmod: 2025-11-13
 tags: ["Reinforcement Learning", "Research Practice"]
 author: "Jasmeet Kaur"
 description: "A short note on an offline RL Algorithm."
-summary: "Implicit through Expectile"
+summary: "Value function as a random variable"
 showToc: false
 disableAnchoredHeadings: false
 ---
