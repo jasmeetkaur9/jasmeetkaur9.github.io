@@ -135,8 +135,11 @@ Total loss to optimize the three networks with
 ```
 
 The following two images compares the performance of IQL with random policy for the two tasks. 
-The left graph is the IQL policy and the right is a random policy. The first image is for Adroit Pen and the second for Hammer.
+The left graph is the IQL policy and the right is a random policy. The plots show the average episode reward
+for 20 episodes.
+Task : Adroit Hand Pen
 ![Adroit Hand Pen](handpen.png)
+Taks : Adroit Hand Hammer
 ![Adroit Hand Hammer](hammer_task.png)
 
 
