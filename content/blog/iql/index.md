@@ -152,6 +152,4 @@ Task : Adroit Hand Hammer
 
 <small><i>Note :
 Feel free to reach out if you:
-1. Get stuck implementing the ideas discussed in this article or have any questions.
-Use of generative AI: No part of this article was generated
-using generative AI tools.</i> </small>
+1. Get stuck implementing the ideas discussed in this article or have any questions.</i> </small>
