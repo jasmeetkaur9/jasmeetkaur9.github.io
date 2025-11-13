@@ -64,7 +64,7 @@ $$
 L_\tau^2(u) = |\tau - \mathbf{1}(u < 0)|  u^2
 $$
 
-Such an asymmetric loss funtion gives more weight to larger target values. The value functon can be learned using :
+Such an asymmetric loss funtion gives more weight to larger target values. The value function can be learned using :
 
 $$
 L_V(\psi) = \mathbb{E}_{(s, a) \sim D}
