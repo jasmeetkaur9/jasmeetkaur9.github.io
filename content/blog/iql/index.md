@@ -14,10 +14,10 @@ disableAnchoredHeadings: false
 ## Implicit Q-learning 
 
 Offline RL involves learning from previously collected data without having access to environment interactions.
-Recall that an RL problem setting consists of a state space, action space, transition dynamics and reward function. A policy determines 
-what actions to take in a given state such that an objective, called the expected return is maximised. 
-Offline RL learns a policy from data collected by a behavorial policy. And, the goal is to enable some generalization in the new learnt
-policy while keeping it close to the behavorial policy for stable learning. This instabliity is caused how the Q-value function is learned using TD targets. 
+Recall that an RL problem setting consists of a state space, action space, transition dynamics, and reward function. A policy determines 
+what actions to take in a given state such that an objective, called the expected return, is maximised. 
+Offline RL learns a policy from data collected by a behavioral policy. And, the goal is to enable some generalization in the new learnt
+policy while keeping it close to the behavioral policy for stable learning. This instability is caused by how the Q-value function is learned using TD targets. 
 
 $$
 L(\theta) = \mathbb{E}_{(s, a, r, s') \sim D}
@@ -37,7 +37,7 @@ is to sample in-distribution or regularize the Q-values to avoid such overestima
 The idea is to treat the value function as a random variable and learn an upper expectile 
 of Q-values of state-action pairs within the dataset. A practical way to understand this is to see how we can modify 
 the TD target to use only what we have in the dataset. Given a transition (s, a, s'), we can learn from a target as follows while avoiding sampling 
-a' :
+a':
 
 $$
 L(\theta) = \mathbb{E}_{(s, a, r, s') \sim D}
@@ -49,7 +49,7 @@ $$
 \right]
 $$
 
-As proposed in [1], V(s') can be learnt using expectile regression. In expectile regression, the goal is learn a parameter that minimizes the following objective:
+As proposed in [1], V(s') can be learnt using expectile regression. In expectile regression, the goal is to learn a parameter that minimizes the following objective:
 
 $$
 argmin_{m_\tau}  \mathbb{E}_{x \sim X} 
@@ -64,7 +64,7 @@ $$
 L_\tau^2(u) = |\tau - \mathbf{1}(u < 0)|  u^2
 $$
 
-Such an asymmetric loss funtion gives more weight to larger target values. The value function can be learned using :
+Such an asymmetric loss function gives more weight to larger target values. The value function can be learned using :
 
 $$
 L_V(\psi) = \mathbb{E}_{(s, a) \sim D}
@@ -74,12 +74,12 @@ $$
 L_\tau^2 \left[\hat{Q}_\theta(s, a) - V(s)\right]
 $$
 
-Finally, a policy (parameterized here by phi) is learned using the advantage weighted regressions using these value functions.
-As described in the paper [1], expectile regression can be directly used on Q-value function. This is problematic because 
+Finally, a policy (parameterized here by phi) is learned using the advantage-weighted regressions using these value functions.
+As described in the paper [1], expectile regression can be directly used on the Q-value function. This is problematic because 
 this random variable now has stochasticity from the next states due to transition dynamics. A larger target value can be attributed to a bad action in a 
-good state rather than a good action over any given state. But learning the two value functions separetely avoids this problem.
+good state rather than a good action in any given state. But learning the two value functions separately avoids this problem.
 
-I coded this up and tested for two tasks - [AdroitHandPen-v1](https://robotics.farama.org/envs/adroit_hand/adroit_pen/) and [AdroitHandHammer-v1](https://minari.farama.org/main/datasets/D4RL/hammer/human-v2/). The entire algorithm can be found in the paper and is explained in the tutorial [2]. Offline datasets made available from Minari are used for training.
+I coded this up and tested for two environments - [AdroitHandPen-v1](https://robotics.farama.org/envs/adroit_hand/adroit_pen/) and [AdroitHandHammer-v1](https://minari.farama.org/main/datasets/D4RL/hammer/human-v2/). The entire algorithm can be found in the paper and is explained in the tutorial [2]. Offline datasets made available from Minari are used for training.
 
 Initialize the three networks: 
 
@@ -132,14 +132,14 @@ Total loss to optimize the three networks with
 
 ```
 
-The following two images compares the performance of IQL with random policy for the two tasks. 
-The left graph is the IQL policy and the right is a random policy. The plots show average episode reward
+The following two images compare the performance of IQL with a random policy for the two tasks. 
+The left graph is the IQL policy, and the right is a random policy. The plots show the average episode reward
 for 20 episodes.
 
 
-Task : Adroit Hand Pen
+Adroit Hand Pen
 ![Adroit Hand Pen](handpen.png)
-Task : Adroit Hand Hammer
+Adroit Hand Hammer
 ![Adroit Hand Hammer](hammer_task.png)
 
 
