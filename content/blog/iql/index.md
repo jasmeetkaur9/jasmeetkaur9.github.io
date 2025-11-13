@@ -11,7 +11,7 @@ disableAnchoredHeadings: false
 ---
 
 
-# Implicit Q-learning 
+## Implicit Q-learning 
 
 Offline RL involves learning from previously collected data without having access to environment interactions.
 Recall that an RL problem setting consists of a state space, action space, transition dynamics and reward function. A policy determines 
@@ -137,9 +137,11 @@ Total loss to optimize the three networks with
 The following two images compares the performance of IQL with random policy for the two tasks. 
 The left graph is the IQL policy and the right is a random policy. The plots show the average episode reward
 for 20 episodes.
+
+
 Task : Adroit Hand Pen
 ![Adroit Hand Pen](handpen.png)
-Taks : Adroit Hand Hammer
+Task : Adroit Hand Hammer
 ![Adroit Hand Hammer](hammer_task.png)
 
 
