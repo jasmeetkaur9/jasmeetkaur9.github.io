@@ -133,7 +133,7 @@ Total loss to optimize the three networks with
 ```
 
 The following two images compares the performance of IQL with random policy for the two tasks. 
-The left graph is the IQL policy and the right is a random policy. The plots show the average episode reward
+The left graph is the IQL policy and the right is a random policy. The plots show average episode reward
 for 20 episodes.
 
 
