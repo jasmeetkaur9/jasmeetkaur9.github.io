@@ -77,7 +77,7 @@ $$
 Finally, a policy (parameterized here by phi) is learned using the advantage-weighted regressions using these value functions.
 As described in the paper [1], expectile regression can be directly used on the Q-value function. This is problematic because 
 this random variable now has stochasticity from the next states due to transition dynamics. A larger target value can be attributed to a bad action in a 
-good state rather than a good action in any given state. But learning the two value functions separately avoids this problem.
+good state rather than a good action in a given state. But learning the two value functions separately avoids this problem.
 
 I coded this up and tested for two environments - [AdroitHandPen-v1](https://robotics.farama.org/envs/adroit_hand/adroit_pen/) and [AdroitHandHammer-v1](https://minari.farama.org/main/datasets/D4RL/hammer/human-v2/). The entire algorithm can be found in the paper and is explained in the tutorial [2]. Offline datasets made available from Minari are used for training.
 
