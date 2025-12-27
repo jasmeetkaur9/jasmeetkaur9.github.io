@@ -4,7 +4,7 @@ date: 2025-05-28
 lastmod: 2025-05-28
 tags: ["Useful Tips", "Reinforcement Learning", "PyTorch", "Research Practice"]
 author: "Jasmeet Kaur"
-description: "This article is my account on learning to implement a researcch paper in reinforcement learning."
+description: "This article is my account on learning to implement a research paper in reinforcement learning."
 summary: "An brief guide to training and experimenting in reinforcement learning."
 showToc: false
 disableAnchoredHeadings: false
