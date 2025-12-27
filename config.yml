@@ -29,7 +29,7 @@ menu:
           weight : 4
 
 params:
-    description: I am a graduate student at UT Austin. My primary research interest is Reinforcement Learning with a focus on methods for generalization, adaptability and sample efficiency."
+    description: I am a graduate student at UT Austin. My primary research interest is Reinforcement Learning with a focus on methods for generalization and adaptability."
     author: Jasmeet Kaur
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
@@ -55,7 +55,10 @@ params:
     profileMode:
           enabled: true
           title: Jasmeet Kaur
-          subtitle: "I am a graduate student at UT Austin. I code decision-making. My primary research interest is Reinforcement Learning with focus on methods for generalization, adaptability and sample efficiency. "
+          subtitle: "I am a graduate student at UT Austin.
+          I code decision-making.
+          My primary research interest is Reinforcement Learning with focus on methods for generalization and adaptability. 
+          You'd often find me asking how good any reasoning framework for sequential decision making is at adapting to unfamiliar unseen tasks."
           imageUrl: "picture.jpeg"
           imageWidth: 160
           imageHeight: 160
