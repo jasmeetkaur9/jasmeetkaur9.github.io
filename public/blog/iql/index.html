@@ -114,7 +114,7 @@ MathJax.Hub.Config({
 
 </div>
   </header> 
-  <div class="post-content"><h1 id="implicit-q-learning">Implicit Q-learning<a hidden class="anchor" aria-hidden="true" href="#implicit-q-learning">#</a></h1>
+  <div class="post-content"><h2 id="implicit-q-learning">Implicit Q-learning<a hidden class="anchor" aria-hidden="true" href="#implicit-q-learning">#</a></h2>
 <p>Offline RL involves learning from previously collected data without having access to environment interactions.
 Recall that an RL problem setting consists of a state space, action space, transition dynamics and reward function. A policy determines
 what actions to take in a given state such that an objective, called the expected return is maximised.
@@ -155,14 +155,14 @@ $$</p>
 $$
 L_\tau^2(u) = |\tau - \mathbf{1}(u &lt; 0)|  u^2
 $$</p>
-<p>Such an asymmetric loss funtion gives more weight to larger target values. The value functon can be learned using :</p>
+<p>Such an asymmetric loss funtion gives more weight to larger target values. The value function can be learned using :</p>
 <p>$$
 L_V(\psi) = \mathbb{E}_{(s, a) \sim D}
 $$</p>
 <p>$$
 L_\tau^2 \left[\hat{Q}_\theta(s, a) - V(s)\right]
 $$</p>
-<p>Finally, a policy is learned using the advantage weighted regressions using these value functions.
+<p>Finally, a policy (parameterized here by phi) is learned using the advantage weighted regressions using these value functions.
 As described in the paper [1], expectile regression can be directly used on Q-value function. This is problematic because
 this random variable now has stochasticity from the next states due to transition dynamics. A larger target value can be attributed to a bad action in a
 good state rather than a good action over any given state. But learning the two value functions separetely avoids this problem.</p>
@@ -193,19 +193,26 @@ good state rather than a good action over any given state. But learning the two 
 </span></span><span style="display:flex;"><span>        loss_phi = torch.exp(0.05 * u_value)
 </span></span><span style="display:flex;"><span>        loss_phi = torch.mul(loss_phi, logprob) 
 </span></span><span style="display:flex;"><span>        loss_phi = torch.mean(loss_phi, dim = 0)
-</span></span><span style="display:flex;"><span>       
 </span></span></code></pre></div><p>Total loss to optimize the three networks with</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>        total_loss = torch.sum(torch.stack([loss_psi, loss_theta, loss_phi]))
 </span></span></code></pre></div><p>The following two images compares the performance of IQL with random policy for the two tasks.
-The left graph is the IQL policy and the right is a random policy. The first image is for Adroit Pen and the second for Hammer.
+The left graph is the IQL policy and the right is a random policy. The plots show average episode reward
+for 20 episodes.</p>
+<p>Task : Adroit Hand Pen
 <img loading="lazy" src="handpen.png" alt="Adroit Hand Pen"  />
 
+Task : Adroit Hand Hammer
 <img loading="lazy" src="hammer_task.png" alt="Adroit Hand Hammer"  />
 </p>
 <h2 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h2>
 <ol>
 <li>Kostrikov, Ilya, Ashvin Nair, and Sergey Levine. &ldquo;Offline reinforcement learning with implicit q-learning.&rdquo;</li>
 <li><a href="https://minari.farama.org/tutorials/using_datasets/IQL_torchrl/">Implicit Q-Learning with TorchRL</a></li>
+</ol>
+<p><small><i>Note :
+Feel free to reach out if you:</p>
+<ol>
+<li>Get stuck implementing the ideas discussed in this article or have any questions.</i> </small></li>
 </ol>
 
 
