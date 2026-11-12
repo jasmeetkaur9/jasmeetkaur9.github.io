@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>From Paper to Prototype | Jasmeet Kaur</title>
+<meta name="keywords" content="Reinforcement Learning, PyTorch, Research Practice">
+<meta name="description" content="This article is my account on implementing an reinforcement learning paper.">
+<meta name="author" content="Jasmeet Kaur">
+<link rel="canonical" href="http://localhost:1313/blog/researchpractice/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.00ff516d4bd4a300e05c6bab3a2e3851e69b5a7a3a533a8490894812e8f2cded.css" integrity="sha256-AP9RbUvUowDgXGurOi44UeabWno6UzqEkIlIEujyze0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/blog/researchpractice/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });"></script>
+
+</head>
+
+<body class="" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Jasmeet Kaur (Alt + H)">
+                <img src="http://localhost:1313/favicon.ico" alt="" aria-label="logo"
+                    height="18">Jasmeet Kaur</a>
+            <div class="logo-switches">
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/publications/" title="Publications">
+                    <span>Publications</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/collabs/" title="Collabs">
+                    <span>Collabs</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      From Paper to Prototype
+    </h1>
+    <div class="post-description">
+      This article is my account on implementing an reinforcement learning paper.
+    </div>
+    <div class="post-meta"><span title='2025-05-28 00:00:00 +0000 UTC'>May 2025</span>&nbsp;·&nbsp;Jasmeet Kaur
+
+</div>
+  </header> 
+  <div class="post-content"><p>The focus group of this short article is anyone starting to study and practice in areas closely related to Reinforcement Learning. It is an account of my experience in implementing some ml papers. Before we proceed, I must add that this article is no replacement for professional advice. You are welcome to read what I learned and test it at your discretion. I am sure that you will find certain things useful. Implementing any machine learning research paper is a helpful skill. I have found it to be particularly useful for understanding my limitations and working on my weaknesses when it comes to coding for my research projects.</p>
+<p>To start, you can pick any paper that you like - a paper that describes a baseline you are interested in, a paper you read but did not understand thoroughly, or a paper that you think would be cool to test and improve in some way. These are all good reasons to get started. You might also want to be clear on how much time you want to commit. When I started, it took me 2-3 months to implement my first RL paper. I had the codebase available from the paper&rsquo;s authors, but I made numerous mistakes when trying to implement it on my own. With more practice, I found that 4-5 days works the best for me. So find what works for you. Feel free to push boundaries, but you might get some pushback.</p>
+<p>Another thing that has helped me is structuring the code and planning out its various components. I have found a well-thought-out project structure is helpful. If you are implementing an RL paper, chances are you need to either generate your dataset or use one available online. Figure things like the dataset, environment, model architecture, trainers, integration, and experiments out before you start. Some questions that I like to keep in mind is - How to test with changing model architecture? How will the optimization be affected? How to process a large amount of data? I usually start with a small example similar to the one used in the paper, and get the code working on this before I run any big experiments.</p>
+<p>My favorite framework to use is <strong>PyTorch</strong>. I think PyTorch is amazing. My first baseline paper had code written in Tensorflow, and I sort of caught up with PyTorch by writing all that Tensorflow code using PyTorch. T&rsquo;was a good exercise. It&rsquo;s well documented with a helpful community - I have been able to find all the answers to my queries on their blog. For recording experiments, logging data, and plots, I have been using a small logger with a set of files that log data and plot it.</p>
+<p>When I started, I spent a lot of effort optimizing my code for &ldquo;time&rdquo;. Looking back, I realised that it can be a good metric to optimize. <strong>Profiling</strong> is helpful to figure out the parts of your code that are slow. Multi-processing and multiple GPUs can be useful if your code demands that. For one of my projects, I realised I could do without it by simply avoiding tensor switching between CPUs and GPUs. Yes, you can save a lot of time by initializing and using all tensors on a single device. Certain operations, like doing matrix decomposition, do not require GPUs, so you would want to keep them on CPUs. Recently, I also spent some days learning about JAX, but I have not used it yet. I will update this when I do.</p>
+<p>When you finally get to code, you want to be mindful of your favorite AI assistance tool to make the most of this exercise. The point should be to understand the paper&rsquo;s main ideas and results while improving one&rsquo;s ability to test out experiments as quickly as possible. I find it useful to use these tools for setting up project environments, certain code conversions, generating links to documents, sometimes understanding what certain code I found online is about, then trying to code it, and generating code snippets that I have given up on. The last one used to happen more often in the beginning, but I improved over time. So, this works fine for me, and I believe you want to give your level of autonomy with these tools, a good thought.</p>
+<p>Finally, the results. This is a tricky part. Specifically, when it comes to implementing RL papers, I think. There are some brilliant resources on reproducibility in RL experiments, which I found extremely helpful, and I share them below. For the simplicity that RL has in its formulation and structure, it is brittle, and it can be tricky to get to work in practice. Some of the things that have helped me so far are - working with small examples, logging the policy, being careful around stop-gradients, rendering the environment, and in some cases, plotting the losses.</p>
+<p>And, this brings to the end of this article for now. I plan to keep adding things as I explore and exploit. Thank you, if you made it this far! <strong>Happy Tinkering with RL!</strong></p>
+<h3 id="resources">Resources:<a hidden class="anchor" aria-hidden="true" href="#resources">#</a></h3>
+<ul>
+<li><a href="https://github.com/williamFalcon/DeepRLHacks">Deep RL Hacks</a></li>
+<li><a href="https://arxiv.org/abs/1709.06560">Deep Reinforcement Learning that Matters (arXiv)</a></li>
+<li><a href="https://andyljones.com/posts/rl-debugging.html">Debugging RL Without the Agonizing Pain</a></li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/reinforcement-learning/">Reinforcement Learning</a></li>
+      <li><a href="http://localhost:1313/tags/pytorch/">PyTorch</a></li>
+      <li><a href="http://localhost:1313/tags/research-practice/">Research Practice</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Jasmeet Kaur</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer><script>
+(function () {
+  var items = document.querySelectorAll(
+    ".post-content > h2, .post-content > h3"
+  );
+  if (!items.length) return;
+  var current = null;
+  var ticking = false;
+
+  function update() {
+    var middle = window.innerHeight / 2;
+    var best = null, bestDist = Infinity;
+    items.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var dist = Math.abs(r.top + r.height / 2 - middle);
+      if (dist < bestDist) { bestDist = dist; best = el; }
+    });
+    if (best !== current) {
+      if (current) current.classList.remove("rail-active");
+      best.classList.add("rail-active");
+      current = best;
+    }
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+})();
+</script>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

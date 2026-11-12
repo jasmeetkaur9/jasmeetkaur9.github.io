@@ -1,0 +1,204 @@
+/* ---------- Text column: 1/4 margin on the left, 1/4 on the right ---------- */
+.main {
+    width: 80%;              /* was 50%: text now uses the middle 60% (20% margin each side) */
+    max-width: 75%;
+    margin: 60px auto;       /* was 0 auto: adds 60px of space above and below the panel */
+    box-sizing: border-box;
+    background: rgba(198, 216, 228, 0.18);
+    border-radius: var(--radius);
+    padding: 56px 48px;      /* was 32px 40px: more room between the panel's edges and the text */
+    border-radius: 24px;   /* or raise your --radius value */
+    box-shadow: 0 0 40px 20px rgba(198, 216, 228, 0.18);
+}
+
+/* ---------- Blog list page: light graphite post cards ---------- */
+.post-entry {
+    background: rgba(95, 99, 100, 0.08);       /* light graphite, slightly see-through */
+    border: 2px solid transparent;
+}
+
+.post-entry:hover {
+    background: rgba(51, 55, 56, 0.12);       /* a touch darker on hover */
+}
+
+/* ---------- Bold text in coral pink ---------- */
+.post-content strong,
+.post-content b,
+.entry-content strong,
+.entry-content b,
+.profile strong,
+.profile b {
+    color: #f86f62;
+}
+
+/* ---------- Phones and small screens: use the full width ---------- */
+@media screen and (max-width: 900px) {
+    .main {
+        width: 100%;
+        max-width: 100%;
+        padding: var(--gap);
+        border-radius: 0;
+    }
+}
+
+/* Graph-paper grid background */
+body,
+body.list {
+    background-color: #ffffff;
+    background-image: radial-gradient(rgba(34, 37, 38, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+}
+
+/* ---------- Timeline rail on the left of blog posts ---------- */
+.post-content {
+    --rail-color: rgba(34, 37, 38, 0.25);   /* same colour as the background dots */
+    --rail-x: 8px;                          /* where the line sits, from the left edge */
+    --rail-gap: 36px;                       /* space between the line and the text */
+    position: relative;
+    padding-left: var(--rail-gap);
+}
+
+/* The plain vertical line */
+.post-content::before {
+    content: "";
+    position: absolute;
+    left: var(--rail-x);
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: var(--rail-color);
+}
+
+/* A dot at the start of every section (each heading) */
+.post-content > h1,
+.post-content > h2,
+.post-content > h3 {
+    position: relative;
+}
+
+.post-content > h1::before,
+.post-content > h2::before,
+.post-content > h3::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--rail-x) + 0.75px - var(--rail-gap));
+    top: 0.6em;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(34, 37, 38, 0.45);   /* a little darker than the line so it stands out */
+    transform: translate(-50%, -50%);
+}
+
+
+
+@media screen and (max-width: 900px) {
+    .post-content { --rail-gap: 26px; --rail-x: 4px; }
+}
+
+/* Long equations scroll sideways instead of spilling out of the panel */
+.katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 0;
+}
+
+/* ---------- Plots: 60% of the text width, centred ---------- */
+.post-content img {
+    display: block;
+    width: 60%;
+    height: auto;
+    margin: 1.5rem auto;
+}
+
+@media screen and (max-width: 900px) {
+    .post-content img { width: 100%; }
+}
+
+/* ---------- Links in coral pink ---------- */
+.post-content a,
+.post-meta a,
+.entry-content a,
+.profile a:not(.button) {
+    color: #fa5d4e;
+    box-shadow: 0 1px 0 rgba(248, 131, 121, 0.5);   /* soft coral underline */
+}
+
+.post-content a:hover,
+.post-meta a:hover,
+.entry-content a:hover,
+.profile a:not(.button):hover {
+    color: #E5635A;                                  /* deeper coral on hover */
+    box-shadow: 0 2px 0 #E5635A;
+}
+
+/* ---------- Main page: no underline on links ---------- */
+.profile a:not(.button),
+.profile a:not(.button):hover {
+    box-shadow: none;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+/* ---------- Publications page: one card like the blog list ---------- */
+.post-content .pub-card {
+    background: rgba(34, 37, 38, 0.08);      /* same light graphite as the blog cards */
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    padding: 24px 28px;
+    color: #222526;                          /* graphite text */
+}
+
+.post-content .pub-card strong,
+.post-content .pub-card b {
+    color: #222526;                          /* titles stay graphite, not coral */
+}
+
+.post-content .pub-card a,
+.post-content .pub-card a:hover {
+    color: #f86f62;                         /* coral links */
+    box-shadow: none;                        /* no underline */
+    text-decoration: none;
+}
+
+.post-content .pub-card a:hover {
+    color: #E5635A;                          /* deeper coral on hover */
+}
+
+.post-content .pub-card ul {
+    margin: 0;
+}
+
+/* No timeline rail on the publications page */
+.post-content:has(.pub-card) {
+    padding-left: 0;
+}
+.post-content:has(.pub-card)::before {
+    display: none;
+}
+
+/* ---------- Font: Playfair Display, slightly smaller ---------- */
+:root {
+    --textsize: 17px;     /* blog post text (was 18px) */
+    --homesize: 16px;     /* homepage intro text (was 16px) */
+    --entrysize: 14px;    /* summaries on the blog list (was 15px) */
+    --primary: #5b6066;    /* titles, headings, homepage name */
+    --content: #35475c;    /* body text of posts */
+    --secondary: #656668; 
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 15px;
+    font-variant-numeric: lining-nums;
+    word-spacing: 0.1em;    /* even-height numbers for dates and [1] references */
+}
+
+.post-title          { font-size: 30px; }   /* was 36px */
+.post-content h1     { font-size: 30px; }   /* was 40px */
+.post-content h2     { font-size: 22px; }   /* was 24px */
+.post-content h3     { font-size: 18px; }   /* was 19px */
+.entry-header h2     { font-size: 18px; }   /* blog list titles, was 20px */
+.profile .profile_inner h1 { font-size: 34px; }  /* homepage name, was 40px */

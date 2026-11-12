@@ -1,6 +1,7 @@
 baseURL: "https://jasmeetkaur9.github.io/" 
 title: Jasmeet Kaur
-paginate: 20
+pagination:
+  pagerSize: 20
 theme: PaperMod
 
 enableInlineShortcodes: true
@@ -11,19 +12,25 @@ taxonomies:
 
 menu:
     main:
-        - name: Papers
-          url: papers/
-          weight: 2
-        - name: Projects
-          url: projects/
-          weight: 3
+        - name : About
+          url : about/
+          weight : 2
+        - name : Publications
+          url : publications/
+          weight : 1
+        - name : Projects
+          url : projects/
+          weight : 3
         - name: Blog
           url: blog/
           weight: 6
+        - name : Collabs
+          url : collabs/
+          weight : 4
 
 params:
-    description: "I am a Professor of Philology at the Institute of Romance Philology in Regensburg, Germany. My research focuses mostly on Portuguese irregular verbs."
-    author: Moritz-Maria von Igelfeld
+    description: I am a graduate student at UT Austin. My primary research interest is Reinforcement Learning with a focus on methods for generalization and adaptability."
+    author: Jasmeet Kaur
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
     defaultTheme: light
@@ -37,7 +44,7 @@ params:
     ShowBreadCrumbs: false
     ShowCodeCopyButtons: true
     ShowAllPagesInArchive: false
-    MainSections: ["books","courses","papers","data"]
+    MainSections: ["publications", "projects", "blog", "collabs"]
     ShowToc: false
     disableScrollToTop: true
     TocOpen: true
@@ -48,24 +55,30 @@ params:
     profileMode:
           enabled: true
           title: Jasmeet Kaur
-          subtitle: "I am graduate student at UT Austin. My primary research interest is Reinforcement Learning with a focus on methods for generalization, adaptability and sample efficiency. "
+          subtitle: "I am a graduate student at UT Austin.
+          I code decision-making.
+          My primary research interest is Reinforcement Learning with focus on methods for generalization and adaptability. 
+          You'd often find me asking how good any reasoning framework for sequential decision making is at adapting to unfamiliar unseen tasks."
           imageUrl: "picture.jpeg"
           imageWidth: 160
           imageHeight: 160
-          imageTitle: Moritz-Maria von Igelfeld
+          imageTitle: Jasmeet Kaur
           buttons:
-            - name: About
-              url: about/
-              weight: 2
-            - name: Papers
-              url: papers/
-              weight: 2
-            - name: Projects
-              url: projects/
-              weight: 3
+            - name : About
+              url : about/
+              weight : 2
+            - name : Publications
+              url : publications/
+              weight : 1
+            - name : Projects
+              url : projects/
+              weight : 3
             - name: Blog
               url: blog/
               weight: 6
+            - name : Collabs
+              url : collabs/
+              weight : 4
 
     socialIcons:
         - name: CV
@@ -73,11 +86,11 @@ params:
         - name: Email
           url: mailto:jkaur@cs.utexas.edu
         - name: Google Scholar
-          url: https://scholar.google.com/citations?user=cL23w-4AAAAJ
+          url: https://scholar.google.com/
         - name: GitHub
-          url: https://github.com/pmichaillat
+          url: https://github.com/jasmeetkaur9
         - name: Twitter
-          url: https://twitter.com/McCallSmith
+          url: https://twitter.com/jasmeeet9
 
     assets:
         disableScrollBarStyle: true
@@ -85,14 +98,26 @@ params:
         hiddenInList: false
         hiddenInSingle: true
     label:
-      text: "Moritz-Maria von Igelfeld"
+      text: "Jasmeet Kaur"
       icon: favicon.ico
       iconHeight: 18
+
+    
 
 markup:
     goldmark:
         renderer:
             unsafe: true
+        extensions:
+            passthrough:
+                enable: true
+                delimiters:
+                    block:
+                        - ['$$', '$$']
+                        - ['\\[', '\\]']
+                    inline:
+                        - ['$', '$']
+                        - ['\\(', '\\)']
     highlight:
         guessSyntax: true
         style: autumn 

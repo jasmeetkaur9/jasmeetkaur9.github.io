@@ -1,0 +1,35 @@
+{{- /* Timeline rail: highlights the paragraph closest to the middle of the screen */ -}}
+<script>
+(function () {
+  var items = document.querySelectorAll(
+    ".post-content > h2, .post-content > h3"
+  );
+  if (!items.length) return;
+  var current = null;
+  var ticking = false;
+
+  function update() {
+    var middle = window.innerHeight / 2;
+    var best = null, bestDist = Infinity;
+    items.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var dist = Math.abs(r.top + r.height / 2 - middle);
+      if (dist < bestDist) { bestDist = dist; best = el; }
+    });
+    if (best !== current) {
+      if (current) current.classList.remove("rail-active");
+      best.classList.add("rail-active");
+      current = best;
+    }
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+})();
+</script>

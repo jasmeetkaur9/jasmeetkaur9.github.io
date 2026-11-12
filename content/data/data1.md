@@ -3,7 +3,7 @@ title: "List of Irregular Verbs Across Romance Languages"
 date: 2013-03-07
 lastmod: 2024-07-12
 tags: ["Romance languages","philology","irregular verbs","Portuguese","Italian","French","Spanish","simulations","dataset","python"]
-author: ["Patrick Fitzcarron O'Leary","Florianus Prinzel","Walter Schoeffler-Henschell","Detlev Amadeus Unterholzer", "Dieter Vogelsang","Moritz-Maria von Igelfeld"]
+author: ["Patrick Fitzcarron O'Leary","Florianus Prinzel","Walter Schoeffler-Henschell","Detlev Amadeus Unterholzer", "Dieter Vogelsang","Jasmeet Kaur"]
 description: "This dataset contains all irregular verbs in known Romance languages."
 summary: "This dataset contains all irregular verbs in known Romance languages."
 editPost:
